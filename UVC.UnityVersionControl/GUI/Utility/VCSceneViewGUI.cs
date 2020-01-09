@@ -48,7 +48,11 @@ namespace UVC.UserInterface
 
         static VCSceneViewGUI()
         {
+#if UNITY_2019_1_OR_NEWER
             SceneView.duringSceneGui += SceneViewUpdate;
+#else
+            SceneView.onSceneGUIDelegate += SceneViewUpdate;
+#endif
             VCSettings.SettingChanged += SceneView.RepaintAll;
             VCCommands.Instance.StatusCompleted += SceneView.RepaintAll;
             EditorApplication.update += EditorUpdate;
